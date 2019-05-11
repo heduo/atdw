@@ -29,13 +29,14 @@ class AtdwController extends Controller
     public function index(Request $request)
     {
         $this->init();
+        return view('welcome');
     }
 
     public function init()
     {
         $this->initRedisByKey('regions');
         $this->initRedisByKey('areas');
-        $products = $this->initProducts();
+        $this->initProducts();
         //$this->printRedisDataByKey('regions');
         //$this->printRedisDataByKey('areas');
 
@@ -53,18 +54,23 @@ class AtdwController extends Controller
         }
     }
 
-    public function initProducts($query = array())
+    public function initProducts()
     {
-        $query = [
-            'key' => $this->apiKey,
-            'out' => 'json',
-            'st' => 'NSW',
-            'cats' => 'ACCOMM',
-            'size' => 10,
-            'pge' => 1
-        ];
-        $products = $this->getProducts($query);
-        $this->addArrToRedis('products', $products);
+        $redisHasData = Redis::get('products');
+        if (!$redisHasData) {
+            $query = [
+                'key' => $this->apiKey,
+                'out' => 'json',
+                'st' => 'NSW',
+                'cats' => 'ACCOMM',
+                'size' => 10,
+                'pge' => 1
+            ];
+            $data = $this->getProducts($query);
+            if (isset($data) && !empty($data)) {
+                $this->addArrToRedis('products', $data);
+            }
+        }
     }
 
     public function getDataByState($key, $state = 'NSW')

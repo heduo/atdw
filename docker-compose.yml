@@ -33,25 +33,6 @@ services:
     networks:
       - app-network
 
-  #MySQL Service
-  db:
-    image: mysql:5.7.22
-    container_name: db
-    restart: unless-stopped
-    tty: true
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: ddb
-      MYSQL_ROOT_PASSWORD: ddb
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
-    volumes:
-      - dbdata:/var/lib/mysql
-      - ./mysql/my.cnf:/etc/mysql/my.cnf
-    networks:
-      - app-network
-
   redis:
     image: redis:3
     container_name: redis

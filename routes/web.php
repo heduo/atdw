@@ -13,3 +13,4 @@
 
 
 Route::get('/', 'AtdwController@index');
+Route::get('/options', 'AtdwController@getOptions');
