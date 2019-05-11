@@ -10662,3 +10662,16 @@ a.text-dark:focus {
   }
 }
 
+.pd-top-lg {
+  padding-top: 4rem;
+}
+
+.pd-btm-lg {
+  padding-bottom: 4rem;
+}
+
+.pd-lr-lg {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+

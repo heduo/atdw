@@ -38,8 +38,7 @@ class AtdwController extends Controller
         $this->initRedisByKey('areas');
         $this->initProducts();
         //$this->printRedisDataByKey('regions');
-        //$this->printRedisDataByKey('areas');
-
+        // $this->printRedisDataByKey('areas');
     }
 
     public function initRedisByKey(String $key, String $state = 'NSW')

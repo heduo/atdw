@@ -1,8 +1,21 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
+
+.pd-top-lg {
+    padding-top: $lg;
+}
+
+.pd-btm-lg {
+    padding-bottom: $lg;
+}
+
+.pd-lr-lg {
+    padding-left: $lg;
+    padding-right: $lg;
+}
