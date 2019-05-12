@@ -17,13 +17,20 @@
     - Run command: "npm run prod"
 8. Open a browser, and visit 'localhost'
 
-# UI design
+# Functionalities
+
+1. Search/Filter accommodations
 
 -   user select a region
 -   when region is selected, areas options belong to that region would be created
 -   user select a area
 -   user input search text in search bar
 -   user click search icon to filter the accommadations/products
+
+2. Show details of an accommodation
+
+-   user click the title/name of an accommodation
+-   A popup window with product details is showd
 
 # Possible problems
 
