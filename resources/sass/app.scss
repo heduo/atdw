@@ -7,15 +7,27 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
+// padding top large
 .pd-top-lg {
     padding-top: $lg;
 }
 
+// padding buttom large
 .pd-btm-lg {
     padding-bottom: $lg;
 }
 
+// padding left and right large
 .pd-lr-lg {
     padding-left: $lg;
     padding-right: $lg;
+}
+
+// style of filter bar
+.select {
+    width: 33% !important;
+}
+// white background color
+.white-bg {
+    background: #fff !important;
 }

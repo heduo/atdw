@@ -16,7 +16,6 @@ import "ant-design-vue/dist/antd.css";
 Vue.use(Antd);
 const app = new Vue({
     el: "#app",
-
     components: { App },
     template: `<app></app>`
 });

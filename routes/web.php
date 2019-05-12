@@ -13,4 +13,8 @@
 
 
 Route::get('/', 'AtdwController@index');
-Route::get('/options', 'AtdwController@getOptions');
+// Route::get('/regions/{state}', 'AtdwController@getRegions');
+Route::get('/options/{state}', 'AtdwController@getOptions');
+Route::get('/products', 'AtdwController@filterProducts');
+//Route::get('/areas/{region}', 'AtdwController@getAreasByRegion');
+//Route::get('/areas/{region}', 'AtdwController@getAreasByRegion');
