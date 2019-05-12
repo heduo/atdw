@@ -15,7 +15,6 @@ class AtdwController extends Controller
     protected $apiKey; // ATLAS api key
     protected $baseUrl; // ATLAS base url
     protected $httpClient; // guzzle client
-    protected $redisClient;
 
     public function __construct()
     {
@@ -81,34 +80,6 @@ class AtdwController extends Controller
     }
 
     /**
-     * Method that send API request to ATLAS to filter products
-     * @param array $queryArr 
-     * @return array $dataArr
-     */
-    public function getProducts($queryArr)
-    {
-        $dataUrl = $this->baseUrl . 'products';
-
-        $data = (string)$this->httpClient->get($dataUrl, [
-            'query' => $queryArr
-        ])->getBody();
-
-        $dataArr = $this->decodeResponse($data);
-        return $dataArr;
-    }
-
-    /**
-     * @param string $data 
-     * @param boolean $assArr
-     * @return array $dataArr
-     */
-    public function decodeResponse($data, $assArr = true)
-    {
-        $dataArr = json_decode(mb_convert_encoding($data, 'UTF-8', 'UTF-16LE'), $assArr);
-        return $dataArr;
-    }
-
-    /**
      * Get array collection from Redis as an associate array
      * @param string $key  
      * @return array $data
@@ -148,7 +119,6 @@ class AtdwController extends Controller
             if ($regions && $areas) {
                 $options['regions'] = $regions;
                 $options['areas'] = $areas;
-
                 exit(json_encode([
                     'success' => true,
                     'options' => $options
@@ -167,6 +137,23 @@ class AtdwController extends Controller
     }
 
     /**
+     * Method that send API request to ATLAS to filter products
+     * @param array $queryArr 
+     * @return array $dataArr
+     */
+    public function getProducts($queryArr)
+    {
+        $dataUrl = $this->baseUrl . 'products';
+
+        $data = (string)$this->httpClient->get($dataUrl, [
+            'query' => $queryArr
+        ])->getBody();
+
+        $dataArr = $this->decodeResponse($data);
+        return $dataArr;
+    }
+
+    /**
      * Filter products via query from request
      * @param Request $request
      */
@@ -175,9 +162,9 @@ class AtdwController extends Controller
         // prepare query data array
         $queryArr = $request->query();
         $queryArr['key'] = $this->apiKey;
-        $queryArr['cats'] = 'ACCOMM';
+        $queryArr['cats'] = 'ACCOMM'; // category set to accommadation
         $queryArr['order'] = 'rnd'; // random order
-        $queryArr['out'] = 'json';
+        $queryArr['out'] = 'json'; // output format set to json
 
         // send api request to fetch filtered data
         $products = $this->getProducts($queryArr);
@@ -187,5 +174,16 @@ class AtdwController extends Controller
                 'products' => $products
             ]));
         }
+    }
+
+    /**
+     * @param string $data 
+     * @param boolean $assArr
+     * @return array $dataArr
+     */
+    public function decodeResponse($data, $assArr = true)
+    {
+        $dataArr = json_decode(mb_convert_encoding($data, 'UTF-8', 'UTF-16LE'), $assArr);
+        return $dataArr;
     }
 }
