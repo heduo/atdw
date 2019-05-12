@@ -43,6 +43,11 @@
           />
         </div>
         <br>
+
+        <div>
+          <p>Number of result: {{numberOfResults}}</p>
+        </div>
+        <br>
         <br>
         <span>
           <a-list itemLayout="vertical" size="large" :dataSource="filteredProducts">
@@ -92,7 +97,7 @@ export default {
       // feedback data
       err_msg: "",
       loading: false,
-      resultsNum: 0,
+      numberOfResults: 0,
 
       // api request data
       currentPage: 1,
@@ -158,6 +163,7 @@ export default {
         .then(function(res) {
           if (res.data.success) {
             const prods = res.data.products.products;
+            self.numberOfResults = res.data.products.numberOfResults;
             if (self.currentPage === 1) {
               self.filteredProducts = prods;
             } else {

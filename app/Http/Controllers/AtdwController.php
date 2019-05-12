@@ -176,6 +176,7 @@ class AtdwController extends Controller
         $queryArr = $request->query();
         $queryArr['key'] = $this->apiKey;
         $queryArr['cats'] = 'ACCOMM';
+        $queryArr['order'] = 'rnd'; // random order
         $queryArr['out'] = 'json';
 
         // send api request to fetch filtered data
